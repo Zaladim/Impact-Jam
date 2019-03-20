@@ -210,7 +210,7 @@ position = Vector2( 25, 25 )
 scale = Vector2( 0.625, 0.625 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 48, 16, 16 )
+region_rect = Rect2( 0, 64, 16, 16 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="InvisibleWall"]
 
