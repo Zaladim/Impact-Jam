@@ -43,8 +43,8 @@ zoom = Vector2( 0.5, 0.5 )
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="pos_text" type="Container" parent="."]
-margin_left = -104.422
-margin_top = 15.8742
-margin_right = -81.4218
-margin_bottom = 36.8742
+margin_left = -10.0
+margin_top = 13.0
+margin_right = 100.0
+margin_bottom = 40.0
 

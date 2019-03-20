@@ -9,7 +9,7 @@ export var speed = 125
 export var jump_speed = 300
 export var gravity = 1000
 
-var fly = true
+var fly = false
 var screen_size
 var cont = 0
 var stuck = false
@@ -102,3 +102,6 @@ func _move(delta):
 		if get_col.collider.get_name() == "PNJ":
 			stuck = true
 			fly = false
+
+func _on_Spike_body_entered():
+	velocity.y = -jump_speed

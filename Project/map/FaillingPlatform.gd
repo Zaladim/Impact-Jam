@@ -24,7 +24,10 @@ func _physics_process(delta):
 	
 func _move(delta):
 	move_and_slide(velocity,Vector2(0,-1))
-	var get_col = get_slide_collision(get_slide_count()-1)
+	var get_col = null
+	
+	if (get_slide_count() != 0):
+		get_col = get_slide_collision(get_slide_count()-1)
 
 	
 	if get_position().y <= init:
