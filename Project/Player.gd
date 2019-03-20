@@ -5,7 +5,8 @@ signal hit
 # var a = 2
 # var b = "text"
 
-export var speed = 350
+export var speed = 150
+export var jump_speed = 350
 export var gravity = 1000
 var screen_size
 
@@ -48,7 +49,7 @@ func _move(delta):
 		velocity.y = 0
 		direction.y = 0
 		if Input.is_action_just_pressed("ui_up"):
-			velocity.y = -speed
+			velocity.y = -jump_speed
 			direction.y = 1
 			
 	if get_col != null:
