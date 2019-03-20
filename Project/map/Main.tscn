@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://map/TileWall.tres" type="TileSet" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Art/colored_land.png" type="Texture" id=4]
 [ext_resource path="res://EnvironnmentDamage/EnvironnementDamage.tres" type="TileSet" id=5]
 [ext_resource path="res://Characters/PNJ/PNJ.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Spawn.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node2D"]
 
@@ -78,4 +79,7 @@ tile_data = PoolIntArray( -917315, 0, 0, -917314, 0, 0, -917313, 0, 0, -851780, 
 
 [node name="PNJ" parent="." instance=ExtResource( 6 )]
 position = Vector2( 603.311, 98.9625 )
+
+[node name="Spawn" parent="." instance=ExtResource( 7 )]
+position = Vector2( 48.7277, 37.3233 )
 
