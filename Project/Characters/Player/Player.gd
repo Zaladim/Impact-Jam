@@ -9,7 +9,7 @@ export var speed = 125
 export var jump_speed = 300
 export var gravity = 1000
 
-var fly = true
+var fly = false
 var screen_size
 var cont = 0
 var text_actual = null
@@ -81,7 +81,8 @@ func _move(delta):
 	
 	move_and_slide(velocity,Vector2(0,-1))
 	
-	var get_col = get_slide_collision(get_slide_count()-1)
+	var get_col = null
+
 	
 	
 	if is_on_floor():
@@ -91,6 +92,7 @@ func _move(delta):
 			velocity.y = -jump_speed
 			direction.y = 1
 			
-	if get_col != null:
+	for i in range(get_slide_count()):
+		get_col = get_slide_collision(i)
 		if get_col.normal == Vector2(0,1):
 			velocity.y = 0
