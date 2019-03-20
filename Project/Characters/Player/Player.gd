@@ -5,9 +5,12 @@ signal hit
 # var a = 2
 # var b = "text"
 
-export var speed = 150
-export var jump_speed = 275
+export var speed = 125
+export var jump_speed = 300
 export var gravity = 1000
+
+var fly = false
+
 var screen_size
 
 var distance = Vector2()
@@ -21,10 +24,18 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-    $AnimatedSprite.play()
-    position.x = clamp(position.x, 0, screen_size.x)
-    position.y = clamp(position.y, 0, screen_size.y)
-	
+	$AnimatedSprite.play()
+	if fly:
+		speed = 300
+		jump_speed = 500
+		
+		if Input.is_action_just_pressed("ui_up"):
+			velocity.y = -jump_speed
+	else:
+		speed = 200
+		jump_speed = 300
+		gravity = 1300
+
 func _physics_process(delta):
 	_move(delta)
 	
