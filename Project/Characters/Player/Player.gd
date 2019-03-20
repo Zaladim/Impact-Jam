@@ -9,9 +9,10 @@ export var speed = 125
 export var jump_speed = 300
 export var gravity = 1000
 
-var fly = false
-
+var fly = true
 var screen_size
+var cont = 0
+var text_actual = null
 
 var distance = Vector2()
 var velocity = Vector2()
@@ -36,9 +37,36 @@ func _process(delta):
 		jump_speed = 300
 		gravity = 1300
 
+	if Input.is_action_just_pressed("ui_page_up"):
+		if cont == 0:
+			_speak("Félicitation ! Tu as réussi à terminer ce parcours...")
+		elif cont == 1:
+			text_actual.queue_free()
+			_speak("Cependant, est ce que c'était difficile avec autant de pouvoirs ?")
+		elif cont == 2:
+			text_actual.queue_free()
+			_speak("Je te propose quelque chose, à chaque fois que tu termineras ce parcours, je te retirerais l'un de tes pouvoirs")
+		elif cont == 3:
+			text_actual.queue_free()
+			_speak("Nous allons voir si tu es capable d'autant briller sans tous tes privilèges !")
+		elif cont == 4:
+			text_actual.queue_free()
+			_speak("#{?&$ !")
+		elif cont == 5:
+			text_actual.queue_free()
+			cont = 0
+			return
+		cont += 1
+
+func _speak(text):
+	var container_text = load("res://Dialog/Label.tscn").instance()
+	container_text._text(text)
+	add_child(container_text)
+	text_actual = container_text
+
 func _physics_process(delta):
 	_move(delta)
-	
+
 func _move(delta):
 	direction.x = int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
 	
