@@ -6,7 +6,7 @@ signal hit
 # var b = "text"
 
 export var speed = 150
-export var jump_speed = 350
+export var jump_speed = 275
 export var gravity = 1000
 var screen_size
 
