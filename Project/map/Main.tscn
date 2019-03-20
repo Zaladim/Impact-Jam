@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://map/TileWall.tres" type="TileSet" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://map/FaillingPlatform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Art/colored_land.png" type="Texture" id=4]
+[ext_resource path="res://EnvironnmentDamage/EnvironnementDamage.tres" type="TileSet" id=5]
 
 [node name="Main" type="Node2D"]
 
@@ -17,43 +18,47 @@ tile_data = PoolIntArray( -4325376, 17, 0, -4325375, 17, 0, -4325374, 17, 0, -43
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 70, 70 )
 
-[node name="Failling" parent="." instance=ExtResource( 3 )]
+[node name="Platform" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="Failling" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 1520, -240 )
 
-[node name="Failling2" parent="." instance=ExtResource( 3 )]
+[node name="Failling2" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 1790, -190 )
 
-[node name="Failling3" parent="." instance=ExtResource( 3 )]
+[node name="Failling3" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 1890, -140 )
 
-[node name="Failling4" parent="." instance=ExtResource( 3 )]
+[node name="Failling4" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 2000, -90 )
 
-[node name="Failling5" parent="." instance=ExtResource( 3 )]
+[node name="Failling5" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 2270, -250 )
 
-[node name="Failling6" parent="." instance=ExtResource( 3 )]
+[node name="Failling6" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 2200, -290 )
 
-[node name="Failling7" parent="." instance=ExtResource( 3 )]
+[node name="Failling7" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 2270, -330 )
 
-[node name="Failling8" parent="." instance=ExtResource( 3 )]
+[node name="Failling8" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 2400, -330 )
 
-[node name="Failling9" parent="." instance=ExtResource( 3 )]
+[node name="Failling9" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 2480, -366 )
 
-[node name="Failling10" parent="." instance=ExtResource( 3 )]
+[node name="Failling10" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 2570, -317 )
 
-[node name="Failling11" parent="." instance=ExtResource( 3 )]
+[node name="Failling11" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 2660, -350 )
 
-[node name="Failling12" parent="." instance=ExtResource( 3 )]
+[node name="Failling12" parent="Platform" instance=ExtResource( 3 )]
 position = Vector2( 2900, -340 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+editor/display_folded = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2( 1024, 0 )
@@ -61,4 +66,12 @@ motion_mirroring = Vector2( 1024, 0 )
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( 510, -20 )
 texture = ExtResource( 4 )
+
+[node name="EnvironnementDamage" type="Node" parent="."]
+
+[node name="TileMap" type="TileMap" parent="EnvironnementDamage"]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -917315, 0, 0, -917314, 0, 0, -917313, 0, 0, -851780, 0, 0, -786245, 0, 0, -720710, 0, 0, -655175, 0, 0, -589640, 0, 0, -524105, 0, 0, -458570, 0, 0, -393035, 0, 0, -327500, 0, 0, -261965, 0, 0, -196430, 0, 0, -130895, 0, 0, 327762, 0, 0, 327811, 0, 0, 327812, 0, 0, 327813, 0, 0, 327814, 0, 0, 393296, 0, 0, 458830, 0, 0, 720966, 0, 0, 720967, 0, 0, 720968, 0, 0 )
 
