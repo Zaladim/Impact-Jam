@@ -10,6 +10,7 @@ var velocity = Vector2()
 var direction = Vector2()
 var init
 var pos
+var explode = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,15 +28,41 @@ func _move(delta):
 		velocity.x = (get_position().x - pos.x) * 55
 		
 	if get_position().y == pos.y:
-		if get_position().x == pos.x:
-			global_position = init
+		$AnimatedBall.animation = "Explosion"
+		var t = Timer.new()
+		t.set_wait_time(0.3)
+		t.set_one_shot(true)
+		self.add_child(t)
+		t.start()
+		yield(t, "timeout")
+		t.queue_free()
+		global_position = init
+		$AnimatedBall.animation = "Default"
 	
 	pos = get_position()
 	
 	move_and_slide(velocity)
 	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	var get_col = null
+	
+	for i in get_slide_count():
+		get_col = get_slide_collision(i)
+		if get_col != null:
+			if get_col.collider.get_name() == "Player":
+				if explode == false:
+					get_col.collider._damage()
+					explode = true
+				velocity.y = 0
+				velocity.x = 0
+				$AnimatedBall.animation = "Explosion"
+				var t = Timer.new()
+				t.set_wait_time(0.3)
+				t.set_one_shot(true)
+				self.add_child(t)
+				t.start()
+				yield(t, "timeout")
+				t.queue_free()
+				global_position = init
+				$AnimatedBall.animation = "Default"
+				velocity.y = 100
+				explode = false

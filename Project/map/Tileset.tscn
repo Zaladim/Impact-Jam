@@ -184,6 +184,13 @@ texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
+[node name="Dispenser" type="Sprite" parent="."]
+position = Vector2( 45, -5 )
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 16, 16, 16 )
+
 [node name="WoodBackground" type="Sprite" parent="."]
 position = Vector2( 15, -5 )
 scale = Vector2( 0.625, 0.625 )
@@ -206,6 +213,7 @@ region_enabled = true
 region_rect = Rect2( 48, 0, 16, 16 )
 
 [node name="InvisibleWall" type="Sprite" parent="."]
+editor/display_folded = true
 position = Vector2( 25, 25 )
 scale = Vector2( 0.625, 0.625 )
 texture = ExtResource( 1 )
