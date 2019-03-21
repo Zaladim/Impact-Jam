@@ -9,6 +9,13 @@ export var speed = 125
 export var jump_speed = 300
 export var gravity = 1000
 
+var life = 3
+var shield = false
+
+var base_speed = 125
+var base_jump = 300
+var damage_jump = 325
+
 var fly = false
 var screen_size
 var cont = 0
@@ -26,6 +33,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if life <= 0:
+		life = 3
+		global_position = $"../Spawn/spr".global_position
+		
+	if $Shield_time.is_stopped():
+		shield = false
+	
 	$AnimatedSprite.play()
 	if fly:
 		speed = 300
@@ -61,9 +75,9 @@ func _process(delta):
 				return
 			cont += 1
 	else:
-		speed = 200
-		jump_speed = 300
-		gravity = 1300
+		speed = base_speed
+		jump_speed = base_jump
+		gravity = 1000
 
 func _speak(text):
 	var container_text = load("res://Dialog/Label.tscn").instance()
@@ -88,7 +102,7 @@ func _move(delta):
 	
 	move_and_slide(velocity,Vector2(0,-1))
 	
-	var get_col = get_slide_collision(get_slide_count()-1)
+	var get_col = null
 	
 	if is_on_floor():
 		velocity.y = 0
@@ -96,12 +110,24 @@ func _move(delta):
 		if Input.is_action_just_pressed("ui_up"):
 			velocity.y = -jump_speed
 			direction.y = 1
-	if get_col != null:
+			
+	for i in get_slide_count():
+		get_col = get_slide_collision(i)
 		if get_col.normal == Vector2(0,1):
 			velocity.y = 0
 		if get_col.collider.get_name() == "PNJ":
 			stuck = true
 			fly = false
 
-func _on_Spike_body_entered():
-	velocity.y = -jump_speed
+func _damage():
+	shield = true
+	velocity.y = -damage_jump
+	life -= 1
+	
+	if $Shield_time.is_stopped():
+		$Shield_time.start()
+
+func _on_Spike_body_entered(body):
+	if body.get_name() == get_name():
+		if body.shield == false:
+			_damage()

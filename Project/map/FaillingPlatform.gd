@@ -5,7 +5,7 @@ extends KinematicBody2D
 # var b = "text"
 
 var speedUp = 25
-var speedDown = 100
+var speedDown = 200
 var distance = Vector2()
 var velocity = Vector2()
 var direction = Vector2()
@@ -39,7 +39,7 @@ func _move(delta):
 	if !is_on_floor():
 		if get_col != null:
 			if get_col.collider.get_name() == "Player":
-				move_and_slide(Vector2(0,5))
+				move_and_slide(Vector2(0,10))
 				var t = Timer.new()
 				t.set_wait_time(0.5)
 				t.set_one_shot(true)
