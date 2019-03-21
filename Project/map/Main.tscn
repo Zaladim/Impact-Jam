@@ -8,8 +8,8 @@
 [ext_resource path="res://Art/colored_land.png" type="Texture" id=6]
 [ext_resource path="res://EnvironmentDamage/Spike.tscn" type="PackedScene" id=7]
 [ext_resource path="res://EnvironmentDamage/Ball.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Characters/Enemy/Arrow.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Characters/Enemy/Skelly.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Characters/Enemy/Skelly.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Characters/Enemy/Arrow.tscn" type="PackedScene" id=10]
 
 [node name="Main" type="Node2D"]
 
@@ -24,7 +24,7 @@ tile_data = PoolIntArray( -4325376, 17, 0, -4325375, 17, 0, -4325374, 17, 0, -43
 position = Vector2( 40, 70 )
 
 [node name="PNJ" parent="." instance=ExtResource( 3 )]
-position = Vector2( 350, 95.2 )
+position = Vector2( -120, 0 )
 
 [node name="Spawn" parent="." instance=ExtResource( 4 )]
 position = Vector2( 49, 64 )
@@ -293,11 +293,23 @@ position = Vector2( 2185, -217 )
 [node name="Ball3" parent="EnvironnementDamage" instance=ExtResource( 8 )]
 position = Vector2( 2136.8, -376 )
 
-[node name="Arrow" parent="." instance=ExtResource( 9 )]
-position = Vector2( 130, 10 )
+[node name="Skelly" parent="." instance=ExtResource( 9 )]
+position = Vector2( 580, 176 )
 
-[node name="Skelly" parent="." instance=ExtResource( 10 )]
-position = Vector2( 170, 64 )
+[node name="Arrow" parent="Skelly" instance=ExtResource( 10 )]
+position = Vector2( 1.42735, 0 )
+
+[node name="Skelly2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 930, 176.713 )
+
+[node name="Arrow" parent="Skelly2" instance=ExtResource( 10 )]
+position = Vector2( 1.42735, 0 )
+
+[node name="Skelly3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1270, 80.2 )
+
+[node name="Arrow" parent="Skelly3" instance=ExtResource( 10 )]
+position = Vector2( 1.42735, 0 )
 
 [connection signal="body_entered" from="EnvironnementDamage/Spike" to="Player" method="_on_Spike_body_entered"]
 [connection signal="body_entered" from="EnvironnementDamage/Spike2" to="Player" method="_on_Spike_body_entered"]

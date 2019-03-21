@@ -4,6 +4,7 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 onready var player = get_node("../Player")
+onready var arrow = get_node("Arrow")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(true)
@@ -17,3 +18,18 @@ func _process(delta):
 		$AnimatedSprite.flip_h = true;
 	else:
 		$AnimatedSprite.flip_h = false;
+	
+	if abs(player.get_position().x - get_position().x) < 500:
+		if arrow.disabled:
+			arrow.global_position = get_position()
+			if get_position().x - player.get_position().x > 0:
+				arrow.left = true
+				arrow.global_position.x = get_position().x - 10
+			else:
+				arrow.left = false
+				arrow.global_position.x = get_position().x + 10
+			arrow.show()
+			arrow._ready()
+			arrow._physics_process(delta)
+			arrow.disabled = false
+		
