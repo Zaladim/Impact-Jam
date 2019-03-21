@@ -22,6 +22,7 @@ var cont = 0
 var stuck = false
 var text_actual = null
 var dialog
+var talking = false
 
 var talk = true
 
@@ -36,7 +37,6 @@ func _ready():
 	dialog = 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(dialog)
 	if life <= 0:
 		life = 3
 		global_position = $"../Spawn/spr".global_position
@@ -54,7 +54,7 @@ func _process(delta):
 	elif stuck:
 		speed = 0
 		jump_speed = 0
-		_dialog(dialog)		
+		dialog = _dialog(dialog)		
 	else:
 		speed = base_speed
 		jump_speed = base_jump
@@ -67,7 +67,6 @@ func _speak(text):
 	text_actual = container_text
 	
 func _dialog(dialog):
-	print(cont)
 	var nextText = Input.is_action_just_pressed("ui_accept")
 	if dialog == 1 && talk:
 		_speak("Vieil Homme : Bravo ! Tu as réussi à terminer ce parcours...")
@@ -89,13 +88,12 @@ func _dialog(dialog):
 		elif cont == 4:
 			text_actual.queue_free()
 			cont = 0
-			dialog = 2
-			print(dialog)
+			dialog += 1
 			fly = false
 			stuck = false
 			talk = true
 			global_position = $"../Spawn/spr".global_position
-			return
+			return dialog
 		cont +=1
 	
 	if dialog == 2 && talk:
@@ -120,7 +118,7 @@ func _dialog(dialog):
 			talk = true
 			#bullet = false
 			global_position = $"../Spawn/spr".global_position
-			return
+			return dialog
 		cont += 1
 	
 	if dialog == 3 && talk:
@@ -145,8 +143,9 @@ func _dialog(dialog):
 			talk = true
 			#bullet = false
 			global_position = $"../Spawn/spr".global_position
-			return
+			return dialog
 		cont += 1
+	return dialog
 
 func _physics_process(delta):
 	_move(delta)

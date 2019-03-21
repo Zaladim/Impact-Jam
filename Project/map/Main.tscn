@@ -24,7 +24,7 @@ tile_data = PoolIntArray( -4325376, 17, 0, -4325375, 17, 0, -4325374, 17, 0, -43
 position = Vector2( 40, 70 )
 
 [node name="PNJ" parent="." instance=ExtResource( 3 )]
-position = Vector2( -120, 0 )
+position = Vector2( 160, -15.8 )
 
 [node name="Spawn" parent="." instance=ExtResource( 4 )]
 position = Vector2( 49, 64 )
