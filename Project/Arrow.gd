@@ -4,7 +4,10 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 var velocity = Vector2()
+var gravity = 1000
+
 var disabled = true
+var ready = true
 var left = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,17 +22,19 @@ func _physics_process(delta):
 		hide()
 		$CollisionPolygon2D.disabled = true
 	else:
-		velocity.y = 5
+		#velocity.y = 5
 		velocity.x = 0
 		if left:
-			velocity.x = -150
+			velocity.x = -200
+			velocity.y += 0.1
 			$Sprite.flip_h = false;
 		else:
-			velocity.x = 150
+			velocity.x = 200
+			velocity.y += 0.1
 			$Sprite.flip_h = true;
 		show()
 		$CollisionPolygon2D.disabled = false
-		move_and_slide(velocity)
+		move_and_slide(velocity, Vector2(0, -1))
 	
 		var get_col = null
 		

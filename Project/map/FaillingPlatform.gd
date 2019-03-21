@@ -10,13 +10,17 @@ var distance = Vector2()
 var velocity = Vector2()
 var direction = Vector2()
 var init
+onready var start = get_position()
 var floating = 50
 var up = false
+
+onready var player = get_node("../../Player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_physics_process(true)
 	init = get_position().y
+	player.connect("dead", self, "_on_player_dead")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
@@ -74,4 +78,5 @@ func _move(delta):
 				velocity.y = (direction.y*distance.y)/delta
 				direction.y = -1;
 			
-			
+func _on_player_dead():
+	global_position = start

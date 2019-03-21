@@ -29,10 +29,10 @@ func _physics_process(delta):
 	else:
 		$Sprite.play()
 		if left:
-			velocity.x = -150
+			velocity.x = -300
 			$Sprite.flip_h = true;
 		else:
-			velocity.x = 150
+			velocity.x = 300
 			$Sprite.flip_h = false;
 		show()
 		$CollisionShape2D.disabled = false
@@ -43,6 +43,9 @@ func _physics_process(delta):
 	for i in get_slide_count():
 		get_col = get_slide_collision(i)
 		if get_col != null:
-			if get_col.collider != get_parent():				
+			if get_col.collider != get_parent() && !get_col.collider.is_in_group("Projectile"):				
 				disabled = true
+			if get_col.collider.is_in_group("Enemy"):
+				get_node("../Enemy/" + get_col.collider.get_name()).dead = true
+				
 				

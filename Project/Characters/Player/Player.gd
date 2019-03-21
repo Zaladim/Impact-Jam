@@ -1,5 +1,5 @@
 extends KinematicBody2D
-signal hit
+signal dead
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -17,6 +17,7 @@ var base_jump = 300
 var damage_jump = 325
 
 var fly = true
+var fire_power = true
 var screen_size
 var cont = 0
 var stuck = false
@@ -61,8 +62,9 @@ func _process(delta):
 		gravity = 1000
 	
 	if Input.is_action_just_pressed("shoot"):
-		if fire.disabled:
-			_fire()
+		if fire_power:
+			if fire.disabled:
+				_fire()
 
 func _speak(text):
 	var container_text = load("res://Dialog/Label.tscn").instance()
@@ -120,7 +122,7 @@ func _dialog(dialog):
 			dialog += 1
 			stuck = false
 			talk = true
-			#bullet = false
+			fire_power = false
 			global_position = $"../Spawn/spr".global_position
 			return dialog
 		cont += 1
@@ -197,6 +199,7 @@ func _damage():
 		if life <= 0:
 			life = 3
 			global_position = $"../Spawn/spr".global_position
+			emit_signal("dead")
 
 func _on_Spike_body_entered(body):
 	if body.get_name() == get_name():

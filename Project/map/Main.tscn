@@ -298,27 +298,36 @@ position = Vector2( 2185, -217 )
 [node name="Ball3" parent="EnvironnementDamage" instance=ExtResource( 9 )]
 position = Vector2( 2136.8, -376 )
 
-[node name="Ennemy" type="Node" parent="."]
+[node name="Enemy" type="Node" parent="."]
 
-[node name="Skelly" parent="Ennemy" instance=ExtResource( 10 )]
-editor/display_folded = true
+[node name="Skelly" parent="Enemy" groups=[
+"Enemy",
+] instance=ExtResource( 10 )]
 position = Vector2( 580, 176 )
 
-[node name="Arrow" parent="Ennemy/Skelly" instance=ExtResource( 11 )]
+[node name="Arrow" parent="Enemy/Skelly" groups=[
+"Projectile",
+] instance=ExtResource( 11 )]
 position = Vector2( 1.42735, 0 )
 
-[node name="Skelly2" parent="Ennemy" instance=ExtResource( 10 )]
-editor/display_folded = true
+[node name="Skelly2" parent="Enemy" groups=[
+"Enemy",
+] instance=ExtResource( 10 )]
 position = Vector2( 930, 176.713 )
 
-[node name="Arrow" parent="Ennemy/Skelly2" instance=ExtResource( 11 )]
+[node name="Arrow" parent="Enemy/Skelly2" groups=[
+"Projectile",
+] instance=ExtResource( 11 )]
 position = Vector2( 1.42735, 0 )
 
-[node name="Skelly3" parent="Ennemy" instance=ExtResource( 10 )]
-editor/display_folded = true
+[node name="Skelly3" parent="Enemy" groups=[
+"Enemy",
+] instance=ExtResource( 10 )]
 position = Vector2( 1270, 80.2 )
 
-[node name="Arrow" parent="Ennemy/Skelly3" instance=ExtResource( 11 )]
+[node name="Arrow" parent="Enemy/Skelly3" groups=[
+"Projectile",
+] instance=ExtResource( 11 )]
 position = Vector2( 1.42735, 0 )
 
 [node name="HUD lives" parent="." instance=ExtResource( 12 )]
