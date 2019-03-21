@@ -16,11 +16,12 @@ var base_speed = 125
 var base_jump = 300
 var damage_jump = 325
 
-var fly = false
+var fly = true
 var screen_size
 var cont = 0
 var stuck = false
 var text_actual = null
+var dialog
 
 var talk = true
 
@@ -32,9 +33,10 @@ var direction = Vector2()
 func _ready():
 	screen_size = get_viewport_rect().size
 	set_physics_process(true)
-
+	dialog = 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print(dialog)
 	if life <= 0:
 		life = 3
 		global_position = $"../Spawn/spr".global_position
@@ -52,7 +54,7 @@ func _process(delta):
 	elif stuck:
 		speed = 0
 		jump_speed = 0
-		_dialog()		
+		_dialog(dialog)		
 	else:
 		speed = base_speed
 		jump_speed = base_jump
@@ -64,32 +66,84 @@ func _speak(text):
 	add_child(container_text)
 	text_actual = container_text
 	
-func _dialog():
-	if talk:
-		_speak("Kiwi")
+func _dialog(dialog):
+	print(cont)
+	var nextText = Input.is_action_just_pressed("ui_accept")
+	if dialog == 1 && talk:
+		_speak("Vieil Homme : Bravo ! Tu as réussi à terminer ce parcours...")
 		talk = false
 		
-	if Input.is_action_just_pressed("ui_down"):
+	if dialog == 1 && nextText:
 		if cont == 0:
 			text_actual.queue_free()
-			_speak("Vieil Homme : Félicitation ! Tu as réussi à terminer ce parcours...")
+			_speak("Cependant, est ce que c'était difficile avec autant de pouvoirs ?...")
 		elif cont == 1:
 			text_actual.queue_free()
-			_speak("Vieil Homme : Cependant, est ce que c'était difficile avec autant de pouvoirs ?")
+			_speak("Je te propose quelque chose, à chaque fois que tu termineras ce parcours, je te retirerais l'une de tes capacités...")
 		elif cont == 2:
 			text_actual.queue_free()
-			_speak("Vieil Homme : Je te propose quelque chose, à chaque fois que tu termineras ce parcours, je te retirerais l'une de tes capacités")
+			_speak("Nous allons voir si tu es capable d'autant briller sans tous tes privilèges !...")
 		elif cont == 3:
 			text_actual.queue_free()
-			_speak("Vieil Homme : Nous allons voir si tu es capable d'autant briller sans tous tes privilèges !")
+			_speak("Reallocalous !")
 		elif cont == 4:
 			text_actual.queue_free()
-			_speak("Vieil Homme : Reallocalous")
-		elif cont == 5:
+			cont = 0
+			dialog = 2
+			print(dialog)
+			fly = false
+			stuck = false
+			talk = true
+			global_position = $"../Spawn/spr".global_position
+			return
+		cont +=1
+	
+	if dialog == 2 && talk:
+		_speak("Vieil Homme : Te revoilà !...")
+		talk = false	
+	
+	elif dialog == 2 && nextText:
+		if cont == 0:
+			text_actual.queue_free()
+			_speak("Tu as réussi à t'adapter mais tu étais encore largement avantagé par ton pouvoir de destruction...")
+		elif cont == 1:
+			text_actual.queue_free()
+			_speak("C'est bien... Voyons si sans aucune de tes capacités tu es capable de le supporter !...")
+		elif cont == 2:
+			text_actual.queue_free()
+			_speak("Reallocalous !")
+		elif cont == 3:
 			text_actual.queue_free()
 			cont = 0
-			fly=true
-			stuck=false
+			dialog += 1
+			stuck = false
+			talk = true
+			#bullet = false
+			global_position = $"../Spawn/spr".global_position
+			return
+		cont += 1
+	
+	if dialog == 3 && talk:
+		_speak("Vieil Homme : Je suis impressionné de te revoir...")
+		talk = false
+	
+	elif dialog == 3 && nextText:
+		if cont == 0:
+			text_actual.queue_free()
+			_speak("J'espère que ce petit jeu entre nous t'as bien fait comprendre certaines choses...")
+		elif cont == 1:
+			text_actual.queue_free()
+			_speak("Tu retiendras qu'avoir des privilèges c'est tant mieux pour toi, mais ne méprise jamais les autres car nous n'avons pas les mêmes histoires...")
+		elif cont == 2:
+			text_actual.queue_free()
+			_speak("Freealous !")
+		elif cont == 3:
+			text_actual.queue_free()
+			cont = 0
+			dialog += 1
+			stuck = false
+			talk = true
+			#bullet = false
 			global_position = $"../Spawn/spr".global_position
 			return
 		cont += 1
