@@ -30,16 +30,16 @@ var distance = Vector2()
 var velocity = Vector2()
 var direction = Vector2()
 
+onready var fire = get_node("../Fire bullet")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
 	set_physics_process(true)
 	dialog = 1
+	fire.disabled = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if life <= 0:
-		life = 3
-		global_position = $"../Spawn/spr".global_position
 		
 	if $Shield_time.is_stopped():
 		shield = false
@@ -59,6 +59,10 @@ func _process(delta):
 		speed = base_speed
 		jump_speed = base_jump
 		gravity = 1000
+	
+	if Input.is_action_just_pressed("shoot"):
+		if fire.disabled:
+			_fire()
 
 func _speak(text):
 	var container_text = load("res://Dialog/Label.tscn").instance()
@@ -182,14 +186,31 @@ func _move(delta):
 			fly = false
 
 func _damage():
-	shield = true
-	velocity.y = -damage_jump
-	life -= 1
+	if shield == false:
+		shield = true
+		velocity.y = -damage_jump
+		life -= 1
+		
+		if $Shield_time.is_stopped():
+			$Shield_time.start()
 	
-	if $Shield_time.is_stopped():
-		$Shield_time.start()
+		if life <= 0:
+			life = 3
+			global_position = $"../Spawn/spr".global_position
 
 func _on_Spike_body_entered(body):
 	if body.get_name() == get_name():
 		if body.shield == false:
 			_damage()
+
+func _fire():
+	fire.global_position = get_position()
+	fire.disabled = false
+	if $AnimatedSprite.animation == "Right":
+		fire.left = false
+		fire.global_position.x = get_position().x + 10
+		fire.global_position.y = get_position().y - 10
+	else:
+		fire.left = true
+		fire.global_position.x = get_position().x - 10
+		fire.global_position.y = get_position().y - 10

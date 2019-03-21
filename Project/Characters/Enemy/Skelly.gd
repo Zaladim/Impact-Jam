@@ -3,7 +3,7 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-onready var player = get_node("../Player")
+onready var player = get_node("../../Player")
 onready var arrow = get_node("Arrow")
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +29,5 @@ func _process(delta):
 				arrow.left = false
 				arrow.global_position.x = get_position().x + 10
 			arrow.show()
-			arrow._ready()
-			arrow._physics_process(delta)
 			arrow.disabled = false
 		

@@ -31,13 +31,13 @@ func _physics_process(delta):
 		$CollisionPolygon2D.disabled = false
 		move_and_slide(velocity)
 	
-	var get_col = null
-	
-	
-	for i in get_slide_count():
-		get_col = get_slide_collision(i)
-		if get_col != null:
-			if get_col.collider != get_parent():				
-				disabled = true
-			if get_col.collider.get_name() == "Player":
-				get_col.collider._damage()
+		var get_col = null
+		
+		for i in get_slide_count():
+			get_col = get_slide_collision(i)
+			if get_col != null:
+				if get_col.collider.get_name() == "Player":
+					if get_col.collider.shield == false:
+						get_col.collider._damage()
+				if get_col.collider != get_parent():				
+					disabled = true
