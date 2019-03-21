@@ -63,7 +63,7 @@ animations = [ {
 script = ExtResource( 1 )
 
 [node name="hud_lives1" type="AnimatedSprite" parent="."]
-position = Vector2( 958.865, 54.0205 )
+position = Vector2( 958.639, 54.0429 )
 frames = SubResource( 1 )
 animation = "full_heart"
 
@@ -73,7 +73,7 @@ frames = SubResource( 2 )
 animation = "full_heart"
 
 [node name="hud_lives3" type="AnimatedSprite" parent="."]
-position = Vector2( 1035.91, 53.0998 )
+position = Vector2( 1034.56, 53.773 )
 frames = SubResource( 3 )
 animation = "full_heart"
 
