@@ -40,13 +40,13 @@ position = Vector2( -0.631117, -1.42001 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="pos_text" type="Container" parent="Camera2D"]
+margin_left = -249.369
+margin_top = 14.42
+margin_right = 250.631
+margin_bottom = 41.42
 
-[node name="pos_text" type="Container" parent="."]
-margin_left = -10.0
-margin_top = 13.0
-margin_right = 100.0
-margin_bottom = 40.0
+[node name="Node2D" type="Node2D" parent="."]
 
 [node name="Shield_time" type="Timer" parent="."]
 wait_time = 0.5

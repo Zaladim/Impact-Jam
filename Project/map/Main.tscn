@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://map/TileWall.tres" type="TileSet" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Art/colored_land.png" type="Texture" id=6]
 [ext_resource path="res://EnvironmentDamage/Spike.tscn" type="PackedScene" id=7]
 [ext_resource path="res://EnvironmentDamage/Ball.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Characters/Enemy/Arrow.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Characters/Enemy/Skelly.tscn" type="PackedScene" id=10]
 
 [node name="Main" type="Node2D"]
 
@@ -22,7 +24,7 @@ tile_data = PoolIntArray( -4325376, 17, 0, -4325375, 17, 0, -4325374, 17, 0, -43
 position = Vector2( 40, 70 )
 
 [node name="PNJ" parent="." instance=ExtResource( 3 )]
-position = Vector2( 650, 216.2 )
+position = Vector2( 350, 95.2 )
 
 [node name="Spawn" parent="." instance=ExtResource( 4 )]
 position = Vector2( 49, 64 )
@@ -72,10 +74,11 @@ position = Vector2( 2900, -340 )
 motion_mirroring = Vector2( 1024, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 460, 780 )
+position = Vector2( 180, 910 )
 texture = ExtResource( 6 )
 
 [node name="EnvironnementDamage" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Spike" parent="EnvironnementDamage" instance=ExtResource( 7 )]
 position = Vector2( 1121, 176.713 )
@@ -289,6 +292,12 @@ position = Vector2( 2185, -217 )
 
 [node name="Ball3" parent="EnvironnementDamage" instance=ExtResource( 8 )]
 position = Vector2( 2136.8, -376 )
+
+[node name="Arrow" parent="." instance=ExtResource( 9 )]
+position = Vector2( 130, 10 )
+
+[node name="Skelly" parent="." instance=ExtResource( 10 )]
+position = Vector2( 170, 64 )
 
 [connection signal="body_entered" from="EnvironnementDamage/Spike" to="Player" method="_on_Spike_body_entered"]
 [connection signal="body_entered" from="EnvironnementDamage/Spike2" to="Player" method="_on_Spike_body_entered"]

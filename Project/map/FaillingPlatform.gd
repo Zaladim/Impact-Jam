@@ -10,6 +10,8 @@ var distance = Vector2()
 var velocity = Vector2()
 var direction = Vector2()
 var init
+var floating = 50
+var up = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,6 +52,20 @@ func _move(delta):
 				distance.y = speedDown*delta
 				velocity.y = (direction.y*distance.y)/delta
 				direction.y = 1;
+		else:
+			if up:
+				if floating < 50:
+					floating += 1
+					move_and_slide(Vector2(0, 10))
+				else:
+					up = false
+			else:
+				if floating > 0:
+					floating -= 1
+					move_and_slide(Vector2(0, -10))
+				else:
+					up = true
+			
 		
 	else:
 		if get_col != null:

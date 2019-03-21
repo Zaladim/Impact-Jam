@@ -22,6 +22,8 @@ var cont = 0
 var stuck = false
 var text_actual = null
 
+var talk = true
+
 var distance = Vector2()
 var velocity = Vector2()
 var direction = Vector2()
@@ -50,30 +52,7 @@ func _process(delta):
 	elif stuck:
 		speed = 0
 		jump_speed = 0
-		
-		if Input.is_action_just_pressed("ui_down"):
-			if cont == 0:
-				_speak("Félicitation ! Tu as réussi à terminer ce parcours...")
-			elif cont == 1:
-				text_actual.queue_free()
-				_speak("Cependant, est ce que c'était difficile avec autant de pouvoirs ?")
-			elif cont == 2:
-				text_actual.queue_free()
-				_speak("Je te propose quelque chose, à chaque fois que tu termineras ce parcours, je te retirerais l'une de tes capacités")
-			elif cont == 3:
-				text_actual.queue_free()
-				_speak("Nous allons voir si tu es capable d'autant briller sans tous tes privilèges !")
-			elif cont == 4:
-				text_actual.queue_free()
-				_speak("#{?&$ !")
-			elif cont == 5:
-				text_actual.queue_free()
-				cont = 0
-				fly=true
-				stuck=false
-				global_position = $"../Spawn/spr".global_position
-				return
-			cont += 1
+		_dialog()		
 	else:
 		speed = base_speed
 		jump_speed = base_jump
@@ -84,6 +63,36 @@ func _speak(text):
 	container_text._text(text)
 	add_child(container_text)
 	text_actual = container_text
+	
+func _dialog():
+	if talk:
+		_speak("Kiwi")
+		talk = false
+		
+	if Input.is_action_just_pressed("ui_down"):
+		if cont == 0:
+			text_actual.queue_free()
+			_speak("Vieil Homme : Félicitation ! Tu as réussi à terminer ce parcours...")
+		elif cont == 1:
+			text_actual.queue_free()
+			_speak("Vieil Homme : Cependant, est ce que c'était difficile avec autant de pouvoirs ?")
+		elif cont == 2:
+			text_actual.queue_free()
+			_speak("Vieil Homme : Je te propose quelque chose, à chaque fois que tu termineras ce parcours, je te retirerais l'une de tes capacités")
+		elif cont == 3:
+			text_actual.queue_free()
+			_speak("Vieil Homme : Nous allons voir si tu es capable d'autant briller sans tous tes privilèges !")
+		elif cont == 4:
+			text_actual.queue_free()
+			_speak("Vieil Homme : Reallocalous")
+		elif cont == 5:
+			text_actual.queue_free()
+			cont = 0
+			fly=true
+			stuck=false
+			global_position = $"../Spawn/spr".global_position
+			return
+		cont += 1
 
 func _physics_process(delta):
 	_move(delta)
