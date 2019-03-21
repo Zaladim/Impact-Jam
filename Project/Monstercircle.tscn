@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Monstercircle.gd" type="Script" id=1]
+[ext_resource path="res://Art/deadcircle.png" type="Texture" id=2]
+
+[sub_resource type="PhysicsMaterial" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "deadcircle",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 22.7556
+
+[node name="Monstercircle" type="RigidBody2D"]
+scale = Vector2( 1.5, 1.5 )
+mass = 0.773469
+physics_material_override = SubResource( 3 )
+gravity_scale = 10.58
+continuous_cd = 1
+can_sleep = false
+linear_velocity = Vector2( 0, 1 )
+linear_damp = 1.0
+angular_damp = 1.0
+applied_force = Vector2( 0, 25 )
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "deadcircle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.50653, 4.43582 )
+shape = SubResource( 2 )
+
