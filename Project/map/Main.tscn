@@ -29,7 +29,7 @@ position = Vector2( 70, 54 )
 position = Vector2( 40, 70 )
 
 [node name="PNJ" parent="." instance=ExtResource( 4 )]
-position = Vector2( -120, 64.2 )
+position = Vector2( 3091.22, -400.407 )
 
 [node name="Spawn" parent="." instance=ExtResource( 5 )]
 position = Vector2( 49, 64 )
