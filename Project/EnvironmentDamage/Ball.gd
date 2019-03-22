@@ -29,6 +29,7 @@ func _move(delta):
 		
 	if get_position().y == pos.y:
 		$AnimatedBall.animation = "Explosion"
+		$CollisionShape2D.disabled = true
 		var t = Timer.new()
 		t.set_wait_time(0.3)
 		t.set_one_shot(true)
@@ -38,6 +39,7 @@ func _move(delta):
 		t.queue_free()
 		global_position = init
 		$AnimatedBall.animation = "Default"
+		$CollisionShape2D.disabled = false
 	
 	pos = get_position()
 	
@@ -55,6 +57,7 @@ func _move(delta):
 				velocity.y = 0
 				velocity.x = 0
 				$AnimatedBall.animation = "Explosion"
+				$CollisionShape2D.disabled = true
 				var t = Timer.new()
 				t.set_wait_time(0.3)
 				t.set_one_shot(true)
@@ -64,5 +67,6 @@ func _move(delta):
 				t.queue_free()
 				global_position = init
 				$AnimatedBall.animation = "Default"
+				$CollisionShape2D.disabled = false
 				velocity.y = 100
 				explode = false

@@ -43,19 +43,18 @@ func _move(delta):
 			direction.y = 0;
 	
 	if !is_on_floor():
-		if get_col != null:
-			if get_col.collider.get_name() == "Player":
-				move_and_slide(Vector2(0,10))
-				var t = Timer.new()
-				t.set_wait_time(0.5)
-				t.set_one_shot(true)
-				self.add_child(t)
-				t.start()
-				yield(t, "timeout")
-				t.queue_free()
-				distance.y = speedDown*delta
-				velocity.y = (direction.y*distance.y)/delta
-				direction.y = 1;
+		if get_col != null:					
+			move_and_slide(Vector2(0,10))
+			var t = Timer.new()
+			t.set_wait_time(0.5)
+			t.set_one_shot(true)
+			self.add_child(t)
+			t.start()
+			yield(t, "timeout")
+			t.queue_free()
+			distance.y = speedDown*delta
+			velocity.y = (direction.y*distance.y)/delta
+			direction.y = 1;
 		else:
 			if up:
 				if floating < 50:
@@ -73,6 +72,9 @@ func _move(delta):
 		
 	else:
 		if get_col != null:
+			if get_col.collider.get_name() == "Player":
+				if get_col.collider.get_position().y > get_position().y:
+					get_col.collider._damage()
 			if get_col.collider.get_name() != "Player":
 				distance.y = speedUp*delta
 				velocity.y = (direction.y*distance.y)/delta

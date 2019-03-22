@@ -25,12 +25,16 @@ func _physics_process(delta):
 		#velocity.y = 5
 		velocity.x = 0
 		if left:
-			velocity.x = -200
-			velocity.y += 0.1
+			velocity.x = -200 + abs(velocity.y)
+			if velocity.x > 0:
+				velocity.x = 0
+			velocity.y += 1
 			$Sprite.flip_h = false;
 		else:
-			velocity.x = 200
-			velocity.y += 0.1
+			velocity.x = 200 - abs(velocity.y)
+			if velocity.x < 0:
+				velocity.x = 0
+			velocity.y += 1
 			$Sprite.flip_h = true;
 		show()
 		$CollisionPolygon2D.disabled = false

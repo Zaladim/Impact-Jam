@@ -1,25 +1,29 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://HUD lives.gd" type="Script" id=1]
-[ext_resource path="res://Art/emptyhearth.png" type="Texture" id=2]
-[ext_resource path="res://Art/fullhearth.png" type="Texture" id=3]
-[ext_resource path="res://Art/mihearth.png" type="Texture" id=4]
+[ext_resource path="res://Art/fullhearth.png" type="Texture" id=2]
+[ext_resource path="res://Art/mihearth.png" type="Texture" id=3]
+[ext_resource path="res://Art/emptyhearth.png" type="Texture" id=4]
+[ext_resource path="res://Art/FireOn.png" type="Texture" id=5]
+[ext_resource path="res://Art/NoFire.png" type="Texture" id=6]
+[ext_resource path="res://Art/FlyOn.png" type="Texture" id=7]
+[ext_resource path="res://Art/FlyOff.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "empty_heart",
+"name": "full_heart",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "full_heart",
+"name": "mi_heart",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "mi_heart",
+"name": "empty_heart",
 "speed": 5.0
 } ]
 
@@ -27,17 +31,17 @@ animations = [ {
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "empty_heart",
+"name": "full_heart",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "full_heart",
+"name": "mi_heart",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "mi_heart",
+"name": "empty_heart",
 "speed": 5.0
 } ]
 
@@ -45,17 +49,43 @@ animations = [ {
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "empty_heart",
+"name": "full_heart",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "full_heart",
+"name": "mi_heart",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "mi_heart",
+"name": "empty_heart",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "On",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Off",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "On",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Off",
 "speed": 5.0
 } ]
 
@@ -76,4 +106,14 @@ animation = "full_heart"
 position = Vector2( 1034.56, 53.773 )
 frames = SubResource( 3 )
 animation = "full_heart"
+
+[node name="Fire" type="AnimatedSprite" parent="."]
+position = Vector2( 890, 20 )
+frames = SubResource( 4 )
+animation = "Off"
+
+[node name="Fly" type="AnimatedSprite" parent="."]
+position = Vector2( 854, 20 )
+frames = SubResource( 5 )
+animation = "Off"
 

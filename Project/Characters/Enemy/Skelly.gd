@@ -40,17 +40,15 @@ func _process(delta):
 				arrow.show()
 				arrow.disabled = false
 				arrow.ready = false
-				arrow.velocity.y = (delta) * (-1*(get_position().y - player.get_position().y) * 30)
+				arrow.velocity.y = (delta) * (-1*(get_position().y - player.get_position().y) * 50) - 30
 			if !arrow.disabled:
 				if $Timer.is_stopped():
 					$Timer.start()
 				
 func _on_player_dead():
-	if dead:
-		dead = false
-		show()
-		$CollisionShape2D.disabled = false
-	_ready()
+	dead = false
+	show()
+	$CollisionShape2D.disabled = false
 
 func _on_Timer_timeout():
 	arrow.disabled = true

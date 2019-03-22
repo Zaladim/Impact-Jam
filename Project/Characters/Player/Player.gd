@@ -13,7 +13,7 @@ var life = 3
 var shield = false
 
 var base_speed = 125
-var base_jump = 300
+var base_jump = 325
 var damage_jump = 325
 
 var fly = true
@@ -48,10 +48,15 @@ func _process(delta):
 	$AnimatedSprite.play()
 	if fly:
 		speed = 300
-		jump_speed = 500
+		jump_speed = 200
+		gravity = 0
 		
-		if Input.is_action_just_pressed("ui_up"):
+		if Input.is_action_pressed("ui_up"):
 			velocity.y = -jump_speed
+		elif Input.is_action_pressed("ui_down"):
+				velocity.y = jump_speed
+		else:
+			velocity.y = 0
 	elif stuck:
 		speed = 0
 		jump_speed = 0
@@ -99,6 +104,8 @@ func _dialog(dialog):
 			stuck = false
 			talk = true
 			global_position = $"../Spawn/spr".global_position
+			emit_signal("dead")
+			life = 3
 			return dialog
 		cont +=1
 	
@@ -124,6 +131,8 @@ func _dialog(dialog):
 			talk = true
 			fire_power = false
 			global_position = $"../Spawn/spr".global_position
+			emit_signal("dead")
+			life = 3
 			return dialog
 		cont += 1
 	
@@ -149,6 +158,11 @@ func _dialog(dialog):
 			talk = true
 			#bullet = false
 			global_position = $"../Spawn/spr".global_position
+			emit_signal("dead")
+			life = 3
+			fly = true
+			$CollisionShape2D.disabled = true
+			hide()
 			return dialog
 		cont += 1
 	return dialog
